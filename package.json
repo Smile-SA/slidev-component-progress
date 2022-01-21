@@ -1,0 +1,70 @@
+{
+  "name": "slidev-component-progress",
+  "version": "0.0.0",
+  "description": "Progress component for Slidev",
+  "homepage": "https://github.com/Smile-SA/slidev-component-progress",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Smile-SA/slidev-component-progress.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Smile-SA/slidev-component-progress/issues"
+  },
+  "main": "dist/progress.js",
+  "browser": "dist/progress.mjs",
+  "module": "dist/progress.mjs",
+  "types": "dist/types/src/index.d.ts",
+  "files": [
+    "dist/*",
+    "src/**/*.vue"
+  ],
+  "scripts": {
+    "dev": "slidev example.md --open",
+    "prebuild": "rimraf ./dist",
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "prepublish": "npm run build",
+    "postbuild": "rimraf ./dist/types/setup",
+    "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'feat(docs): updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
+    "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'feat(docs): updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
+    "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'feat(docs): updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
+  },
+  "keywords": [
+    "vuejs",
+    "slidev",
+    "progress"
+  ],
+  "author": {
+    "name": "Tony Cabaye",
+    "email": "tonai59+github@gmail.com",
+    "url": "https://github.com/tonai"
+  },
+  "license": "GPL",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.27"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.10",
+    "@babel/preset-typescript": "^7.16.7",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@slidev/cli": "^0.28.2",
+    "@slidev/theme-default": "^0.21.1",
+    "@vue/babel-preset-app": "^4.5.15",
+    "@vueuse/shared": "^7.5.4",
+    "@zerollup/ts-transform-paths": "^1.7.18",
+    "cross-env": "^7.0.3",
+    "generate-changelog": "^1.8.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.64.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.31.1",
+    "rollup-plugin-vue": "^6.0.0",
+    "ttypescript": "^1.5.13",
+    "typescript": "^4.5.4",
+    "vue": "^3.2.27"
+  }
+}
