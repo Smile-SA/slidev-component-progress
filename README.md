@@ -1,5 +1,7 @@
 # slidev-component-progress
 
+[![NPM version](https://img.shields.io/npm/v/slidev-component-progress?color=3AB9D4&label=)](https://www.npmjs.com/package/slidev-component-progress)
+
 Progress component for Slidev `Slidev`.
 
 ## Installation
