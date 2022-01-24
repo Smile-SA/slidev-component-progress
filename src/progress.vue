@@ -30,7 +30,6 @@ function removeEmptyValues(obj: Record<string, any>): Record<string, any> {
 
 function getTree(tree: TocItem[], lvl: number = 0): TocItem[] {
   if (lvl === Number(level)) {
-    console.log(tree);
     return tree;
   }
   return tree.reduce((acc, item) => {
