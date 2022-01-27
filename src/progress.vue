@@ -28,7 +28,10 @@ function removeEmptyValues(obj: Record<string, any>): Record<string, any> {
   return Object.fromEntries(Object.entries(obj).filter(([, value]) => value));
 }
 
-function getTree(tree: TocItem[], lvl: number = 0): TocItem[] {
+function getTree(tree: TocItem[], lvl: number = 1): TocItem[] {
+  if (lvl > Number(level)) {
+    return [];
+  }
   if (lvl === Number(level)) {
     return tree;
   }
