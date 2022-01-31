@@ -117,7 +117,7 @@ function getRouteIndex(path: string) {
     <div
       class="progress-bar"
       :style="{
-        width: (($slidev.nav.currentPage - 1) / $slidev.nav.total) * 100 + '%',
+        width: ($slidev.nav.currentPage / $slidev.nav.total) * 100 + '%',
       }"
     ></div>
   </div>
