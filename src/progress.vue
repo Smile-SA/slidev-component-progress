@@ -105,15 +105,16 @@ function getRouteIndex(path: string) {
     :class="{ 'progress-container-bottom': position === 'bottom' }"
     :style="cssVars"
   >
-    <div
+    <RouterLink
       v-for="item in tree"
       :key="item.path"
+      :to="item.path"
       class="progress-part"
       :style="{
         width: (1 - getRouteIndex(item.path) / $slidev.nav.total) * 100 + '%',
       }"
       :title="item.title"
-    ></div>
+    ></RouterLink>
     <div
       class="progress-bar"
       :style="{
