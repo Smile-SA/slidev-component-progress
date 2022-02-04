@@ -300,8 +300,7 @@ function handleClick() {
     class="progress"
     :class="{
       'progress--bottom': position === 'bottom',
-      'progress--cover': $slidev.nav.currentPage === 1,
-      'progress--end': $slidev.nav.currentPage - 1 === $slidev.nav.total,
+      [`progress--${$slidev.nav.currentLayout}`]: $slidev.nav.currentLayout
     }"
     :style="cssVars"
   >
