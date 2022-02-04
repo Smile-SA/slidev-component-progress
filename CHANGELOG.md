@@ -1,3 +1,11 @@
+### 0.3.0 (2022-02-04)
+
+##### New Features
+
+*  add currentLayout as class variant ([e931ae5e](https://github.com/Smile-SA/slidev-component-progress/commit/e931ae5e56f77fda9a7391e215bb29a066a6a029))
+*  add tooltips ([b5ca59cd](https://github.com/Smile-SA/slidev-component-progress/commit/b5ca59cd3bee9ea57cdf9e9eb4ba17674a36d807))
+*  update styles ([b1be88b0](https://github.com/Smile-SA/slidev-component-progress/commit/b1be88b02cea30e79c54255c2af1b8d6c9987ab8))
+
 ### 0.2.0 (2022-01-27)
 
 ##### Bug Fixes
