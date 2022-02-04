@@ -1,3 +1,3 @@
 <template>
-  <Progress level="2"/>
+  <Progress level="2" barColor="cornflowerblue"/>
 </template>
