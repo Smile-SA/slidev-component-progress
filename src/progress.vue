@@ -23,12 +23,21 @@ const props = defineProps<{
   opacity?: number | string;
   position?: "top" | "bottom";
   strokeColor?: string;
+  thickness?: string;
   transitionDuration?: string;
 }>();
 
 const vm = getCurrentInstance();
 
-const { activeColor, barColor, level = 1, opacity, strokeColor, transitionDuration } = props;
+const {
+  activeColor,
+  barColor,
+  level = 1,
+  opacity,
+  strokeColor,
+  thickness,
+  transitionDuration,
+} = props;
 
 const tree = computed(() => getTree(tocTree.value));
 
@@ -47,6 +56,7 @@ const cssVars = computed(() =>
     "--height": height.value + "px",
     "--opacity": opacity,
     "--stroke-color": strokeColor,
+    "--thickness": thickness,
     "--transition-duration": transitionDuration,
   })
 );
@@ -123,6 +133,7 @@ function handleClick() {
 .progress {
   --bar-color: var(--slidev-theme-primary);
   --opacity: 0.5;
+  --thickness: 2px;
   --transition-duration: 200ms;
 
   position: absolute;
@@ -162,7 +173,7 @@ function handleClick() {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  height: 2px;
+  height: var(--thickness);
   margin: 0 -2px;
   background-color: var(--bar-color, #000000);
   transition: width var(--transition-duration);
@@ -218,8 +229,69 @@ function handleClick() {
   transition: fill var(--transition-duration);
 }
 
+.dark .progress__circle {
+  stroke: var(--stroke-color, #ffffff);
+}
+
 .progress__circle--active {
   fill: var(--active-color, #ffffff);
+}
+
+.dark .progress__circle--active {
+  fill: var(--active-color, #000000);
+}
+
+.progress__link {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    height: 5px;
+    background-color: var(--stroke-color, #000000);
+    transform: translate(-50%, 7px);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility var(--transition-duration),
+      opacity var(--transition-duration);
+  }
+}
+
+.dark .progress__link::before {
+  background-color: var(--stroke-color, #ffffff);
+}
+
+.progress__tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 100%);
+  white-space: nowrap;
+  font-size: 80%;
+  padding-top: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility var(--transition-duration),
+    opacity var(--transition-duration);
+}
+
+.progress__link:hover::before,
+.progress__link:hover .progress__tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.progress__link--start .progress__tooltip {
+  left: 0;
+  transform: translate(0, 100%);
+}
+
+.progress__link--end .progress__tooltip {
+  left: 100%;
+  transform: translate(-100%, 100%);
 }
 </style>
 
@@ -244,8 +316,12 @@ function handleClick() {
       >
         <RouterLink
           class="progress__link"
+          :class="{
+            'progress__link--start': Number(item.path) - 1 < $slidev.nav.total / 4,
+            'progress__link--end':
+              Number(item.path) - 1 > (3 * $slidev.nav.total) / 4,
+          }"
           :to="item.path"
-          :title="item.title"
           @click="handleClick()"
         >
           <svg class="progress__step" :width="height" :height="height">
@@ -259,6 +335,7 @@ function handleClick() {
               :cy="height / 2"
             />
           </svg>
+          <div class="progress__tooltip" v-html="item.title"></div>
         </RouterLink>
       </div>
       <div
