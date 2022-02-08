@@ -58,6 +58,7 @@ const cssVars = computed(() =>
     "--stroke-color": strokeColor,
     "--thickness": thickness,
     "--transition-duration": transitionDuration,
+    "display": window.location.search.indexOf('print') !== -1 ? "none" : undefined,
   })
 );
 
