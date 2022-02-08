@@ -1,3 +1,9 @@
+#### 0.3.1 (2022-02-08)
+
+##### New Features
+
+*  hide the component in print mode ([226240b5](https://github.com/Smile-SA/slidev-component-progress/commit/226240b53748996fbd0edaafcd34194af985f70e))
+
 ### 0.3.0 (2022-02-04)
 
 ##### New Features
