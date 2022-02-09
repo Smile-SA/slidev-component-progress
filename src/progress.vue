@@ -136,18 +136,56 @@ function handleClick() {
   --opacity: 0.5;
   --thickness: 2px;
   --transition-duration: 200ms;
+  --line-height: 1.5em;
+  --margin: 2px;
+  --padding: 8px;
 
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  height: var(--height);
-  margin: 2px;
+  height: calc(var(--margin) * 2 + var(--height));
+  font-size: 80%;
+  line-height: var(--line-height);
+  background-color: inherit;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1)
+      calc(
+        var(--margin) + var(--height) + var(--padding) + var(--line-height) -
+          5px
+      ),
+    transparent
+      calc(
+        var(--margin) * 2 + var(--height) * 2 + var(--padding) +
+          var(--line-height)
+      )
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1)
+      calc(
+        var(--margin) + var(--height) + var(--padding) + var(--line-height) -
+          5px
+      ),
+    transparent
+      calc(
+        var(--margin) * 2 + var(--height) * 2 + var(--padding) +
+          var(--line-height)
+      )
+  );
   opacity: var(--opacity);
-  transition: opacity var(--transition-duration);
+  transition: opacity var(--transition-duration),
+    height var(--transition-duration);
 
   &:hover {
     opacity: 1;
+    height: calc(
+      var(--margin) * 2 + var(--height) * 2 + var(--padding) +
+        var(--line-height)
+    );
   }
 }
 
@@ -165,8 +203,9 @@ function handleClick() {
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
   left: 0;
+  height: var(--height);
+  margin: var(--margin);
 }
 
 .progress__bar {
@@ -175,7 +214,7 @@ function handleClick() {
   top: 50%;
   transform: translateY(-50%);
   height: var(--thickness);
-  margin: 0 -2px;
+  margin: 0 calc(var(--margin) * -1);
   background-color: var(--bar-color, #000000);
   transition: width var(--transition-duration);
 }
@@ -246,7 +285,7 @@ function handleClick() {
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -271,8 +310,7 @@ function handleClick() {
   bottom: 0;
   transform: translate(-50%, 100%);
   white-space: nowrap;
-  font-size: 80%;
-  padding-top: 5px;
+  padding-top: var(--padding);
   visibility: hidden;
   opacity: 0;
   transition: visibility var(--transition-duration),
@@ -301,7 +339,7 @@ function handleClick() {
     class="progress"
     :class="{
       'progress--bottom': position === 'bottom',
-      [`progress--${$slidev.nav.currentLayout}`]: $slidev.nav.currentLayout
+      [`progress--${$slidev.nav.currentLayout}`]: $slidev.nav.currentLayout,
     }"
     :style="cssVars"
   >
@@ -317,7 +355,8 @@ function handleClick() {
         <RouterLink
           class="progress__link"
           :class="{
-            'progress__link--start': Number(item.path) - 1 < $slidev.nav.total / 4,
+            'progress__link--start':
+              Number(item.path) - 1 < $slidev.nav.total / 4,
             'progress__link--end':
               Number(item.path) - 1 > (3 * $slidev.nav.total) / 4,
           }"
