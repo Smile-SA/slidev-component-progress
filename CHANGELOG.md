@@ -1,3 +1,9 @@
+#### 0.3.3 (2022-02-09)
+
+##### Bug Fixes
+
+*  first slide progress ([ffe0c7c4](https://github.com/Smile-SA/slidev-component-progress/commit/ffe0c7c4cd47b7df0e2a2ada37cad8fc965083e7))
+
 #### 0.3.2 (2022-02-09)
 
 ##### Bug Fixes
