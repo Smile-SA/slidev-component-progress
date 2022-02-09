@@ -13,7 +13,7 @@ layout: intro
 
 ---
 
-## Part 1.1
+## Part 1.1 <img alt="" src="https://sli.dev/logo-title.png" class="inline h-1em" />
 
 ---
 

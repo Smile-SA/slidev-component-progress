@@ -219,6 +219,7 @@ function handleClick() {
   transition: width var(--transition-duration);
 }
 
+.progress--first .progress__bar,
 .progress__bar--next {
   -webkit-mask-image: linear-gradient(
     to left,
@@ -306,6 +307,7 @@ function handleClick() {
 
 .progress__tooltip {
   position: absolute;
+  width: max-content;
   left: 50%;
   bottom: 0;
   transform: translate(-50%, 100%);
@@ -339,6 +341,7 @@ function handleClick() {
     class="progress"
     :class="{
       'progress--bottom': position === 'bottom',
+      'progress--first': $slidev.nav.currentPage === 1,
       [`progress--${$slidev.nav.currentLayout}`]: $slidev.nav.currentLayout,
     }"
     :style="cssVars"
