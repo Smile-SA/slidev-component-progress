@@ -1,3 +1,9 @@
+#### 0.3.2 (2022-02-09)
+
+##### Bug Fixes
+
+*  add background for better readability ([79f47960](https://github.com/Smile-SA/slidev-component-progress/commit/79f47960e0fb2a873e0e0befdab744800c37aade))
+
 #### 0.3.1 (2022-02-08)
 
 ##### New Features
