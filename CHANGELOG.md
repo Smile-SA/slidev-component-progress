@@ -1,3 +1,9 @@
+#### 0.3.4 (2022-02-25)
+
+##### Bug Fixes
+
+*  styles ([38b3dd80](https://github.com/Smile-SA/slidev-component-progress/commit/38b3dd8012af0080df9ac5f0553ef380ea6522d8))
+
 #### 0.3.3 (2022-02-09)
 
 ##### Bug Fixes
