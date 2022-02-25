@@ -7,6 +7,7 @@ hideInToc: true
 
 ---
 layout: intro
+class: bg-red-200
 ---
 
 # Part 1
@@ -37,6 +38,7 @@ layout: intro
 
 ---
 layout: intro
+class: bg-red-700 text-white
 ---
 
 # Part 2

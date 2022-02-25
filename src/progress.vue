@@ -58,7 +58,8 @@ const cssVars = computed(() =>
     "--stroke-color": strokeColor,
     "--thickness": thickness,
     "--transition-duration": transitionDuration,
-    "display": window.location.search.indexOf('print') !== -1 ? "none" : undefined,
+    display:
+      window.location.search.indexOf("print") !== -1 ? "none" : undefined,
   })
 );
 
@@ -144,10 +145,14 @@ function handleClick() {
   top: 0;
   right: 0;
   left: 0;
-  height: calc(var(--margin) * 2 + var(--height));
+  height: 0;
+  padding-bottom: calc(var(--margin) * 2 + var(--height));
+  overflow: visible;
   font-size: 80%;
   line-height: var(--line-height);
   background-color: inherit;
+  background-clip: content-box;
+  box-sizing: content-box;
   -webkit-mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1),
@@ -177,10 +182,10 @@ function handleClick() {
       )
   );
   opacity: var(--opacity);
-  transition: opacity var(--transition-duration),
-    height var(--transition-duration);
+  transition: opacity var(--transition-duration), padding var(--transition-duration), height var(--transition-duration);
 
   &:hover {
+    padding: 0;
     opacity: 1;
     height: calc(
       var(--margin) * 2 + var(--height) * 2 + var(--padding) +
