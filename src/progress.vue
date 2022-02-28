@@ -5,7 +5,7 @@ import type { TocItem } from "@slidev/client/logic/nav";
 import * as nav from "@slidev/client/logic/nav";
 import { configs } from "@slidev/client/env";
 
-const { rawRoutes, tree: tocTree } = nav;
+const { currentPage, rawRoutes, tree: tocTree } = nav;
 
 interface ComponentCustomProperties {
   $slidev: {
@@ -48,6 +48,8 @@ const maxLevel = computed(() =>
 const minHeight = computed(() => maxLevel.value * 4);
 
 const height = computed(() => Math.max(props.height || 0, minHeight.value));
+
+const gradientWidth = computed(() => (1 / (currentPage.value - 1) * 100) + "%");
 
 const cssVars = computed(() =>
   removeEmptyValues({
@@ -229,13 +231,13 @@ function handleClick() {
   -webkit-mask-image: linear-gradient(
     to left,
     transparent,
-    rgba(0, 0, 0, 1) 20px,
+    rgba(0, 0, 0, 1) v-bind(gradientWidth),
     rgba(0, 0, 0, 1) 100%
   );
   mask-image: linear-gradient(
     to left,
     transparent,
-    rgba(0, 0, 0, 1) 20px,
+    rgba(0, 0, 0, 1) v-bind(gradientWidth),
     rgba(0, 0, 0, 1) 100%
   );
 }
