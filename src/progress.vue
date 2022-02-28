@@ -49,7 +49,7 @@ const minHeight = computed(() => maxLevel.value * 4);
 
 const height = computed(() => Math.max(props.height || 0, minHeight.value));
 
-const gradientWidth = computed(() => (1 / (currentPage.value - 1)) * 100 + "%");
+const gradientWidth = computed(() => currentPage.value === 1 ? "var(--margin)" :  (1 / (currentPage.value - 1)) * 100 + "%");
 
 const rightMargin = computed(
   () =>
@@ -240,13 +240,13 @@ function handleClick() {
   -webkit-mask-image: linear-gradient(
     to left,
     transparent,
-    rgba(0, 0, 0, 1) v-bind(gradientWidth),
+    rgba(0, 0, 0, 1) calc(v-bind(gradientWidth) - var(--margin)),
     rgba(0, 0, 0, 1) 100%
   );
   mask-image: linear-gradient(
     to left,
     transparent,
-    rgba(0, 0, 0, 1) v-bind(gradientWidth),
+    rgba(0, 0, 0, 1) calc(v-bind(gradientWidth) - var(--margin)),
     rgba(0, 0, 0, 1) 100%
   );
 }

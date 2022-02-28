@@ -1,5 +1,6 @@
 ---
 theme: default
+layout: cover
 hideInToc: true
 ---
 
