@@ -1,3 +1,9 @@
+#### 0.4.2 (2022-02-28)
+
+##### Bug Fixes
+
+*  error when tree is empty ([06caefec](https://github.com/Smile-SA/slidev-component-progress/commit/06caefec689a6e1094cbc084ec033aee91e7fb75))
+
 #### 0.4.1 (2022-02-28)
 
 ##### Bug Fixes
