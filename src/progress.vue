@@ -49,11 +49,16 @@ const minHeight = computed(() => maxLevel.value * 4);
 
 const height = computed(() => Math.max(props.height || 0, minHeight.value));
 
-const gradientWidth = computed(() => currentPage.value === 1 ? "var(--margin)" :  (1 / (currentPage.value - 1)) * 100 + "%");
+const gradientWidth = computed(() =>
+  currentPage.value === 1
+    ? "var(--margin)"
+    : (1 / (currentPage.value - 1)) * 100 + "%"
+);
 
-const rightMargin = computed(
-  () =>
-    (height.value / 2 - (tree.value[tree.value.length - 1].level - 1) * 2) * 2
+const rightMargin = computed(() =>
+  tree.value[tree.value.length - 1]
+    ? (height.value / 2 - (tree.value[tree.value.length - 1].level - 1) * 2) * 2
+    : 0
 );
 
 const cssVars = computed(() =>
