@@ -1,3 +1,13 @@
+### 0.4.0 (2022-02-28)
+
+##### New Features
+
+*  add classe on circles, remove DOM elements, fix right margin ([a0b6fd13](https://github.com/Smile-SA/slidev-component-progress/commit/a0b6fd13dfde69d44a1fa26a948be4127e181d4a))
+
+##### Bug Fixes
+
+*  calculate bar gradient width depending on the current slide ([55cd02f1](https://github.com/Smile-SA/slidev-component-progress/commit/55cd02f13c733b8a3af5390adfec4facbf821e8d))
+
 #### 0.3.4 (2022-02-25)
 
 ##### Bug Fixes
