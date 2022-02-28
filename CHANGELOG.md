@@ -1,3 +1,9 @@
+#### 0.4.1 (2022-02-28)
+
+##### Bug Fixes
+
+*  divide by zero ([0887a06c](https://github.com/Smile-SA/slidev-component-progress/commit/0887a06c9d4b4802dd6818eac23cfc4645f42552))
+
 ### 0.4.0 (2022-02-28)
 
 ##### New Features
