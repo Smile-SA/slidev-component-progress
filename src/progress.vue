@@ -49,7 +49,12 @@ const minHeight = computed(() => maxLevel.value * 4);
 
 const height = computed(() => Math.max(props.height || 0, minHeight.value));
 
-const gradientWidth = computed(() => (1 / (currentPage.value - 1) * 100) + "%");
+const gradientWidth = computed(() => (1 / (currentPage.value - 1)) * 100 + "%");
+
+const rightMargin = computed(
+  () =>
+    (height.value / 2 - (tree.value[tree.value.length - 1].level - 1) * 2) * 2
+);
 
 const cssVars = computed(() =>
   removeEmptyValues({
@@ -60,6 +65,7 @@ const cssVars = computed(() =>
     "--stroke-color": strokeColor,
     "--thickness": thickness,
     "--transition-duration": transitionDuration,
+    "--right-margin": rightMargin.value + "px",
     display:
       window.location.search.indexOf("print") !== -1 ? "none" : undefined,
   })
@@ -184,7 +190,8 @@ function handleClick() {
       )
   );
   opacity: var(--opacity);
-  transition: opacity var(--transition-duration), padding var(--transition-duration), height var(--transition-duration);
+  transition: opacity var(--transition-duration),
+    padding var(--transition-duration), height var(--transition-duration);
 
   &:hover {
     padding: 0;
@@ -213,6 +220,7 @@ function handleClick() {
   left: 0;
   height: var(--height);
   margin: var(--margin);
+  margin-right: calc(var(--margin) + var(--right-margin));
 }
 
 .progress__bar {
@@ -221,7 +229,8 @@ function handleClick() {
   top: 50%;
   transform: translateY(-50%);
   height: var(--thickness);
-  margin: 0 calc(var(--margin) * -1);
+  margin: 0 calc((var(--margin) + var(--right-margin)) * -1) 0
+    calc(var(--margin) * -1);
   background-color: var(--bar-color, #000000);
   transition: width var(--transition-duration);
 }
@@ -242,7 +251,6 @@ function handleClick() {
   );
 }
 
-.progress__previous,
 .progress__active {
   position: absolute;
   top: 50%;
@@ -252,7 +260,6 @@ function handleClick() {
 }
 
 .dark .progress__bar,
-.dark .progress__previous,
 .dark .progress__active {
   background-color: var(--bar-color, #ffffff);
 }
@@ -281,12 +288,22 @@ function handleClick() {
   stroke: var(--stroke-color, #ffffff);
 }
 
-.progress__circle--active {
+.progress__circle--active,
+.progress__circle--next {
   fill: var(--active-color, #ffffff);
 }
 
-.dark .progress__circle--active {
+.dark .progress__circle--active,
+.dark .progress__circle--next {
   fill: var(--active-color, #000000);
+}
+
+.progress__circle--prev {
+  fill: var(--bar-color, #000000);
+}
+
+.dark .progress__circle--prev {
+  fill: var(--bar-color, #ffffff);
 }
 
 .progress__link {
@@ -378,8 +395,13 @@ function handleClick() {
               v-for="level in maxLevel - item.level + 1"
               :key="level"
               class="progress__circle"
-              :class="{ 'progress__circle--active': item === lastActiveRoute }"
-              :r="height / 2 - (maxLevel - level) * 2"
+              :class="{
+                'progress__circle--active': item === lastActiveRoute,
+                'progress__circle--prev': previousRoutes.includes(item),
+                'progress__circle--next':
+                  !previousRoutes.includes(item) && item !== lastActiveRoute,
+              }"
+              :r="height / 2 - (item.level + level - 2) * 2"
               :cx="height / 2"
               :cy="height / 2"
             />
@@ -387,18 +409,6 @@ function handleClick() {
           <div class="progress__tooltip" v-html="item.title"></div>
         </RouterLink>
       </div>
-      <div
-        v-for="item in previousRoutes"
-        :key="item.path"
-        class="progress__previous"
-        :style="{
-          right: `calc(${
-            (1 - getRouteIndex(item.path) / $slidev.nav.total) * 100
-          }% + ${(item.level - 1) * 2}px)`,
-          width: `${height - (item.level - 1) * 4}px`,
-          height: `${height - (item.level - 1) * 4}px`,
-        }"
-      ></div>
       <div
         class="progress__active"
         :style="{
