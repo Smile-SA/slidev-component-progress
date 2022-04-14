@@ -1,3 +1,9 @@
+### 0.5.0 (2022-04-14)
+
+##### New Features
+
+*  use slidev new Titles component ([7a04f1c1](https://github.com/Smile-SA/slidev-component-progress/commit/7a04f1c1047bf36ab0130e1e433737dfc25c9a04))
+
 #### 0.4.2 (2022-02-28)
 
 ##### Bug Fixes
