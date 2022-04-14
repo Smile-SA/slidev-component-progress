@@ -4,6 +4,7 @@ import type { UnwrapNestedRefs } from "@vue/reactivity";
 import type { TocItem } from "@slidev/client/logic/nav";
 import * as nav from "@slidev/client/logic/nav";
 import { configs } from "@slidev/client/env";
+import Titles from "/@slidev/titles.md";
 
 const { currentPage, rawRoutes, tree: tocTree } = nav;
 
@@ -411,7 +412,9 @@ function handleClick() {
               :cy="height / 2"
             />
           </svg>
-          <div class="progress__tooltip" v-html="item.title"></div>
+          <div class="progress__tooltip">
+            <Titles :no="item.path" />
+          </div>
         </RouterLink>
       </div>
       <div

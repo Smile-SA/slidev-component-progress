@@ -11,19 +11,19 @@ layout: intro
 class: bg-red-100
 ---
 
-# Part 1
+# **Part 1**
 
 ---
 
-## Part 1.1 <img alt="" src="https://sli.dev/logo-title.png" class="inline h-1em" />
+## Part 1.1 ![Logo slidev](https://sli.dev/logo-title.png)
 
 ---
 
-## Part 1.2
+## `Part 1.2`
 
 ---
 
-## Part 1.3
+## Part 1.3 ![Logo Smile](/logo.png)
 
 ---
 
