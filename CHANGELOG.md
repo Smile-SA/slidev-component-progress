@@ -1,3 +1,9 @@
+#### 0.5.1 (2022-05-06)
+
+##### Chores
+
+*  update packages ([f4787518](https://github.com/Smile-SA/slidev-component-progress/commit/f478751851a78ab298d983963aa5b79d08e8e156))
+
 ### 0.5.0 (2022-04-14)
 
 ##### New Features
