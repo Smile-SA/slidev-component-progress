@@ -1,4 +1,6 @@
-img {
-  display: inline-block;
-  height: 1em;
+h1, h2, h3, h4, h5, h6, .progress__tooltip {
+  img {
+    display: inline-block;
+    height: 1em;
+  }
 }

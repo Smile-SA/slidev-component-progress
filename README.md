@@ -13,17 +13,30 @@ Shows a progress bar that represents the completed percentage of the presentatio
 npm i slidev-component-progress
 ```
 
-## Usage
+## Configuration
 
-Create a `./setup/main.ts` file in your `Slidev` project and register the plugin:
-```js
-import { defineAppSetup } from '@slidev/types'
-import Progress from 'slidev-component-progress'
+Define this package into your slidev addons.
 
-export default defineAppSetup(({ app, router }) => {
-  app.use(Progress)
-})
+In your slides metadata (using frontmatter):
 ```
+---
+addons:
+  - slidev-component-progress
+---
+```
+
+Or in your `package.json`:
+```json
+{
+  "slidev": {
+    "addons": [
+      "slidev-component-progress"
+    ]
+  }
+}
+```
+
+## Usage
 
 Create a `./global-top.vue` file in your `Slidev` project and use the component:
 ```vue
@@ -32,7 +45,16 @@ Create a `./global-top.vue` file in your `Slidev` project and use the component:
 </template>
 ```
 
-## Parameters
+## Components
+
+### Progress
+
+Component that displays the slides progress:
+```vue
+<Progress level="2"/>
+```
+
+Parameters:
 
 * `activeColor` (type: `string`, default: `'#ffffff'` (light) or `'#000000'` (dark)): The color of the active item
 * `barColor` (type: `string`): The color of the progress bar, by default, it will use the `--slidev-theme-primary` CSS variable
