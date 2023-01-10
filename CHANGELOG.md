@@ -1,3 +1,9 @@
+#### 1.0.1 (2023-01-10)
+
+##### Bug Fixes
+
+*  error accessing  variable ([0245db59](https://github.com/Smile-SA/slidev-component-progress/commit/0245db59a6489fc055c5004b2daac2bc9a2ee6f5))
+
 ## 1.0.0 (2022-05-20)
 
 ##### Refactors
