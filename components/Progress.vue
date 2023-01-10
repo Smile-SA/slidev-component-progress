@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance } from "vue";
-import type { UnwrapNestedRefs } from "@vue/reactivity";
 import type { TocItem } from "@slidev/client/logic/nav";
-import * as nav from "@slidev/client/logic/nav";
-import { configs } from "@slidev/client/env";
+import type { SlidevContext } from "@slidev/client/modules/context";
+
+import { computed, inject } from "vue";
+import { currentPage, rawRoutes, tree as tocTree } from "@slidev/client/logic/nav";
+import { injectionSlidevContext } from "@slidev/client/constants"
 import Titles from "/@slidev/titles.md";
 
-const { currentPage, rawRoutes, tree: tocTree } = nav;
-
-interface ComponentCustomProperties {
-  $slidev: {
-    nav: UnwrapNestedRefs<typeof nav>;
-    configs: typeof configs;
-    themeConfigs: typeof configs["themeConfig"];
-  };
-}
+const $slidev = inject(injectionSlidevContext, {} as SlidevContext)
 
 const props = defineProps<{
   activeColor?: string;
@@ -27,8 +20,6 @@ const props = defineProps<{
   thickness?: string;
   transitionDuration?: string;
 }>();
-
-const vm = getCurrentInstance();
 
 const {
   activeColor,
@@ -79,7 +70,7 @@ const cssVars = computed(() =>
 
 const lastActiveRoute = computed(() =>
   getLastActiveRoute(
-    (vm?.proxy as unknown as ComponentCustomProperties).$slidev.nav.currentPage
+    $slidev?.nav.currentPage ?? 0
   )
 );
 
@@ -119,10 +110,10 @@ function isRouteActive(item: TocItem, path: number): boolean {
   return false;
 }
 
-function getLastActiveRoute(path: number): null | TocItem {
+function getLastActiveRoute(path: number): TocItem {
   return tree.value.reduce(
-    (acc: null | TocItem, item) => (isRouteActive(item, path) ? item : acc),
-    null
+    (acc: TocItem, item) => (isRouteActive(item, path) ? item : acc),
+    tree.value[0]
   );
 }
 
