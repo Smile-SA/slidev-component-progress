@@ -150,7 +150,7 @@ function handleClick() {
   top: 0;
   right: 0;
   left: 0;
-  height: 0;
+  height: 0 !important;
   padding-bottom: calc(var(--margin) * 2 + var(--height));
   overflow: visible;
   font-size: 80%;
@@ -196,7 +196,7 @@ function handleClick() {
     height: calc(
       var(--margin) * 2 + var(--height) * 2 + var(--padding) +
         var(--line-height)
-    );
+    ) !important;
   }
 }
 

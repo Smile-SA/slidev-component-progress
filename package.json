@@ -36,7 +36,8 @@
     "slidev": ">=0.32.1"
   },
   "peerDependencies": {
-    "vue": "^3.2.34"
+    "vue": "^3.2.34",
+    "@slidev/client": "0.x"
   },
   "devDependencies": {
     "@slidev/cli": "0.x",
