@@ -1,3 +1,9 @@
+#### 1.0.2 (2023-02-10)
+
+##### Bug Fixes
+
+*  size bug with new version of slidev ([c00498ab](https://github.com/Smile-SA/slidev-component-progress/commit/c00498abe9a95e0cb813736c74719ffa9084e787))
+
 #### 1.0.1 (2023-01-10)
 
 ##### Bug Fixes
