@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { TocItem } from "@slidev/client/logic/nav";
-import type { SlidevContext } from "@slidev/client/modules/context";
+import type { TocItem } from "@slidev/client/logic/nav.ts";
+import type { SlidevContext } from "@slidev/client/modules/context.ts";
 
 import { computed, inject } from "vue";
-import { currentPage, rawRoutes, tree as tocTree } from "@slidev/client/logic/nav";
-import { injectionSlidevContext } from "@slidev/client/constants"
+import { currentPage, rawRoutes, tree as tocTree } from "@slidev/client/logic/nav.ts";
+import { injectionSlidevContext } from "@slidev/client/constants.ts"
 import Titles from "/@slidev/titles.md";
 
 const $slidev = inject(injectionSlidevContext, {} as SlidevContext)
