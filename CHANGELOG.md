@@ -1,3 +1,10 @@
+### 1.1.0 (2024-04-02)
+
+##### Chores
+
+*  update deps ([1a2fd1f3](https://github.com/Smile-SA/slidev-component-progress/commit/1a2fd1f3dd7d36c7f0c52ad0203f08ada6e31bce))
+*  update license ([4c6915cf](https://github.com/Smile-SA/slidev-component-progress/commit/4c6915cfc6a0d3d2a1a82bc471ed1e5dd7940bf0))
+
 #### 1.0.3 (2023-04-20)
 
 ##### Bug Fixes
