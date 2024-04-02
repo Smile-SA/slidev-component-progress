@@ -33,15 +33,15 @@
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0",
-    "slidev": ">=0.32.1"
+    "slidev": ">=0.48.0"
   },
   "peerDependencies": {
     "vue": "^3.2.34",
-    "@slidev/client": "0.x"
+    "@slidev/client": "^0.48.0"
   },
   "devDependencies": {
-    "@slidev/cli": "0.x",
-    "@slidev/theme-default": "0.x",
+    "@slidev/cli": "^0.48.0",
+    "@slidev/theme-default": "latest",
     "@vueuse/shared": "^8.5.0",
     "generate-changelog": "^1.8.0",
     "vue": "^3.2.34"

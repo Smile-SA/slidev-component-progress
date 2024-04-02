@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useNav, useSlideContext } from "@slidev/client"
+import { useNav } from "@slidev/client"
 
 import type { TocItem } from "@slidev/types";
 
 import { slides } from "#slidev/slides";
 import Titles from "#slidev/title-renderer";
 
-const { $slidev, $route } = useSlideContext()
-const { currentPage, currentPath, currentLayout, tocTree, total } = useNav()
+const { currentPage, currentLayout, tocTree, total } = useNav()
 
 const props = defineProps<{
   activeColor?: string;
@@ -363,7 +362,7 @@ function handleClick() {
     class="progress"
     :class="{
       'progress--bottom': position === 'bottom',
-      'progress--first': currentPage.value === 1,
+      'progress--first': currentPage === 1,
       [`progress--${currentLayout}`]: currentLayout,
     }"
     :style="cssVars"
