@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import type { TocItem } from "@slidev/client/logic/nav.ts";
-import type { SlidevContext } from "@slidev/client/modules/context.ts";
+import { computed } from "vue";
+import { useNav, useSlideContext } from "@slidev/client"
 
-import { computed, inject } from "vue";
-import { currentPage, rawRoutes, tree as tocTree } from "@slidev/client/logic/nav.ts";
-import { injectionSlidevContext } from "@slidev/client/constants.ts"
-import Titles from "/@slidev/titles.md";
+import type { TocItem } from "@slidev/types";
 
-const $slidev = inject(injectionSlidevContext, {} as SlidevContext)
+import { slides } from "#slidev/slides";
+import Titles from "#slidev/title-renderer";
+
+const { $slidev, $route } = useSlideContext()
+const { currentPage, currentPath, currentLayout, tocTree, total } = useNav()
 
 const props = defineProps<{
   activeColor?: string;
@@ -70,7 +71,7 @@ const cssVars = computed(() =>
 
 const lastActiveRoute = computed(() =>
   getLastActiveRoute(
-    $slidev?.nav.currentPage ?? 0
+    currentPage.value ?? 0
   )
 );
 
@@ -96,23 +97,23 @@ function getTree(tree: TocItem[], lvl: number = 1): TocItem[] {
   }, [] as TocItem[]);
 }
 
-function getRouteIndex(path: string): number {
-  return rawRoutes.findIndex((route) => route.path === path);
+function getRouteIndex(no: number): number {
+  return slides.value.findIndex((route) => route.no === no);
 }
 
-function isRouteActive(item: TocItem, path: number): boolean {
-  if (Number(item.path) === path) {
+function isRouteActive(item: TocItem, no: number): boolean {
+  if (item.no === no) {
     return true;
   }
   if (item.children && item.children.length > 0) {
-    return item.children.some((child) => isRouteActive(child, path));
+    return item.children.some((child) => isRouteActive(child, no));
   }
   return false;
 }
 
-function getLastActiveRoute(path: number): TocItem {
+function getLastActiveRoute(no: number): TocItem {
   return tree.value.reduce(
-    (acc: TocItem, item) => (isRouteActive(item, path) ? item : acc),
+    (acc: TocItem, item: TocItem) => (isRouteActive(item, no) ? item : acc),
     tree.value[0]
   );
 }
@@ -362,8 +363,8 @@ function handleClick() {
     class="progress"
     :class="{
       'progress--bottom': position === 'bottom',
-      'progress--first': $slidev.nav.currentPage === 1,
-      [`progress--${$slidev.nav.currentLayout}`]: $slidev.nav.currentLayout,
+      'progress--first': currentPage.value === 1,
+      [`progress--${currentLayout}`]: currentLayout,
     }"
     :style="cssVars"
   >
@@ -373,16 +374,16 @@ function handleClick() {
         :key="item.path"
         class="progress__part"
         :style="{
-          width: (1 - getRouteIndex(item.path) / $slidev.nav.total) * 100 + '%',
+          width: (1 - getRouteIndex(item.no) / total) * 100 + '%',
         }"
       >
         <RouterLink
           class="progress__link"
           :class="{
             'progress__link--start':
-              Number(item.path) - 1 < $slidev.nav.total / 4,
+              item.no - 1 < total / 5,
             'progress__link--end':
-              Number(item.path) - 1 > (3 * $slidev.nav.total) / 4,
+              item.no - 1 > (4 * total) / 5,
           }"
           :to="item.path"
           @click="handleClick()"
@@ -404,7 +405,7 @@ function handleClick() {
             />
           </svg>
           <div class="progress__tooltip">
-            <Titles :no="item.path" />
+            <Titles :no="item.no" />
           </div>
         </RouterLink>
       </div>
@@ -412,7 +413,7 @@ function handleClick() {
         class="progress__active"
         :style="{
           right: `calc(${
-            (1 - getRouteIndex(lastActiveRoute?.path) / $slidev.nav.total) * 100
+            (1 - getRouteIndex(lastActiveRoute?.no) / total) * 100
           }% + ${(lastActiveRoute?.level - 2) * 2}px)`,
           width: `${height - (lastActiveRoute?.level - 1) * 4 + 4}px`,
           height: `${height - (lastActiveRoute?.level - 1) * 4 + 4}px`,
@@ -422,11 +423,11 @@ function handleClick() {
         class="progress__bar"
         :class="{
           'progress__bar--next':
-            Number(lastActiveRoute?.path) < $slidev.nav.currentPage,
+            lastActiveRoute?.no < currentPage,
         }"
         :style="{
           width: `calc(${
-            (($slidev.nav.currentPage - 1) / $slidev.nav.total) * 100
+            ((currentPage - 1) / total) * 100
           }% + 6px)`,
         }"
       ></div>
